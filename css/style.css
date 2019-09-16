@@ -9,12 +9,32 @@ a {
 	/*color: black;*/
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
 .nav-container {
     position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
-    background: green;
+    background: #058d9e;
     overflow: hidden;
     width: 100%;
     height: 37px;
@@ -74,11 +94,27 @@ ul.nav-list {
     position: fixed;
     top: 37px;
     z-index: 20;
-    width: 300px;
+    /* width: 200px; */
     /* right: 50%; */
     left: 50%;
     transform: translateX(-50%);
-    background: white;
+    background: #fffdfd;
+    display: none; 
+    border: 1px solid black;
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.bg-for-notice {
+    background-color: #19181826;
+    z-index: 18;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: none;
 }
 
@@ -89,16 +125,30 @@ ul.nav-list {
 
 .dropdown-notice ul li {
     padding: 10px;
-    font-size: 13px;
+    font-size: 14px;
+    border-bottom: 1px solid black;
 }
 
 .dropdown-notice ul li a {
     color: black;
-    font-family: calibri;
+    font-family: arial;
 }
 
 .dropdown-notice ul li:hover {
 	background-color: grey;
+}
+
+.badge {
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    right: 12px;
+    background-color: red;
+    font-size: 13px;
+    padding: 1px 3px;
+    /* color: red; */
+    font-weight: bold;
+    border-radius: 10px;
 }
 
 .main {
@@ -132,7 +182,7 @@ ul.nav-list {
 
 .all-post-hihi {
 	border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid #b1b1b1;
     background-color: white;
     padding-bottom: 20px;
     padding-left: 10px;
@@ -246,18 +296,30 @@ input#submit-post-yourself:hover {
 
 .reaction-option ul li button {
     width: 100%;
-    padding: 10px;
-    font-size: 20px;
+    height: 42px;
+    vertical-align: middle;
+    padding: 6px;
+    font-size: 25px;
     background: white;
-    border: 1px solid;
+    border: none;
+    border-top: 1px solid grey;
+    outline: none;
+    color: grey;
 }
 
 .reaction-option ul li button:hover {
-	background-color: blue;
+	color: #058D9E;
+    font-size: 30px;
 }
 
 .comment-container {
 	margin-top: 30px;
+}
+
+.comment {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4d4d4;
 }
 
 .ava-author-comment {
@@ -276,4 +338,40 @@ input#submit-post-yourself:hover {
 .comment-content {
     margin-top: 10px;
     padding: 0 50px;
+}
+
+.your-comment-container {
+    /* margin-top: 20px; */
+    padding: 35px 20px 10px 20px;
+}
+
+form.your-comment {
+    overflow: hidden;
+}
+
+input#ip-your-comment {
+    width: calc(100% - 50px);
+    float: left;
+    display: block;
+    padding: 5px;
+    font-size: 16px;
+}
+
+input#submit-yourcommet {
+    padding: 6px;
+    font-size: 16px;
+    border: none;
+    background: #03A9F4;
+    text-align: center;
+    width: 50px;
+    color: white;
+    font-weight: bold;
+    font-family: calibri;
+    vertical-align: middle;
+    height: 32px;
+    float: left;
+}
+
+input#submit-yourcommet:hover {
+    background-color: #005F6B;
 }

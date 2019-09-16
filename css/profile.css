@@ -1,0 +1,229 @@
+* {
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    /*color: black;*/
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+.main {
+    margin-top: 37px;
+    overflow: hidden;
+    background: #e0e0e0;
+}
+
+.left {
+    width: 25%;
+    float: left;
+}
+
+.ava-container {
+    margin-bottom: 40px;
+}
+
+.background-ava {
+    overflow: hidden;
+    height: 300px;
+}
+
+img {
+    width: 100%;
+    min-height: 100%;
+}
+
+.ava-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-ava {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid white;
+    transform: translate(-50%, -50%);
+}
+
+.following-container {
+    overflow: hidden;
+    /* padding: 10px; */
+    padding: 0px;
+}
+
+.following-container h4 {
+    padding: 10px;
+    font-size: 20px;
+    font-family: calibri;
+}
+
+.following {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.person-follow {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+}
+
+.person-follow a {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    background: url('../images/img6.jpg');
+    background-position: 50%;
+    background-size: cover;
+}
+
+.all-post-hihi {
+    border: none;
+    border-radius: 0px;
+}
+
+.follow-option {
+    overflow: hidden;
+}
+
+.follow-option button {
+    float: right;
+    border-radius: 3px;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: calibri;
+    font-size: 20px;
+}
+
+button#unfollow {
+    background: #00BCD4;
+}
+
+button#follow {
+    background: #17cc17;
+    display: none;
+}
+
+#follow:hover {
+    background-color: green;
+}
+
+#unfollow:hover {
+    background-color: #058D9E;
+}
+
+.upload-option {
+    margin-bottom: 20px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    padding: 10px;
+}
+
+input#upload-bg {
+    padding: 6px 10px;
+    border: none;
+    outline: none;
+    background: #03A9F4;
+    color: white;
+    font-size: 15px;
+    font-family: calibri;
+}
+
+input#upload-bg:hover {
+    background-color: #058D9E;
+}
+
+/*.post-yourself-container {
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.all-post-hihi {
+    border-radius: 5px;
+    border: 1px solid #b1b1b1;
+    background-color: white;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.post-yourself-container header {
+    padding: 10px 20px;
+    font-weight: bold;
+    font-family: calibri;
+    font-size: 20px;
+    background: white;
+}
+
+form.post-yourself {
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.ava-post-yourself {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+input#post-yourself {
+    padding: 11px;
+    width: calc(100% - 70px);
+    float: left;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid grey;
+}
+
+input#submit-post-yourself {
+    border: none;
+    padding: 7px;
+    margin-top: 10px;
+    width: calc(100% - 70px);
+    font-weight: bold;
+    font-family: calibri;
+    font-size: 20px;
+    color: white;
+    background: #10c1d8;
+    margin-left: 50px;
+}
+
+input#submit-post-yourself:hover {
+    background-color: #005f6b;
+}*/
