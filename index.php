@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['username'])) {
+	header("Location: login.php");
+	exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,28 +24,32 @@
 		<div class="navigation">
 			<ul class="nav-list">
 				<li>
-					<a href="#" title="Home">
+					<a href="index.php" title="Home">
 						<i class="fa fa-home"></i>
 					</a>
 				</li>
 				<li>
-					<a href="#" title="Profile">
+					<a href="profile.php" title="Profile">
 						<i class="fa fa-user"></i>
 					</a>
 				</li>
-				<li>
+				<li style="position: relative;" id="notification">
 					<span>
-						<i class="fa fa-bell"></i>
+						<i class="fa fa-bell" title="Notification"></i>
+					</span>
+					<span class="badge">
+						3
 					</span>
 				</li>
 			</ul>
 		</div>
 		<div class="logout-container">
-			<a href="#" title="Log out">
+			<a href="logout.php" title="Log out">
 				<i class="fa fa-sign-out"></i>
 			</a>
 		</div>
 	</div>
+	<div class="bg-for-notice"></div>
 	<div class="dropdown-notice">
 		<ul>
 			<li>
@@ -47,7 +62,7 @@
 				<a href="#">Nguyen Hoang Anh commented your post</a>
 			</li>
 			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
+				<a href="#">Nguyen Hoang Anh commented your post heh kskd k lsk ksl kdl sk kslk dk lskd llkskdk  k ksk ks</a>
 			</li>
 		</ul>
 	</div>
@@ -108,50 +123,11 @@
 									<p>This is so interesting!</p>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -198,6 +174,12 @@
 									<p>This is so interesting!</p>
 								</div>
 							</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -242,6 +224,209 @@
 								<div class="comment-content">
 									<p>This is so interesting!</p>
 								</div>
+							</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="post all-post-hihi">
+					<div class="post-info">
+						<div class="ava-post">
+							<img src="images/img2.jpg">
+						</div>
+						<div class="author-post">
+							<a href="#">Anh Nguyen</a>
+						</div>
+					</div>
+					<div class="post-content">
+						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
+					</div>
+					<div class="reaction-counter">
+						<p>100 likes</p>
+					</div>
+					<div class="post-reaction">
+						<div class="reaction-option">
+							<ul>
+								<li>
+									<button>
+										<i class="fa fa-thumbs-up"></i>
+									</button>
+								</li>
+								<li>
+									<button>
+										<i class="fa fa-comment"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+						<div class="comment-container">
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="post all-post-hihi">
+					<div class="post-info">
+						<div class="ava-post">
+							<img src="images/img2.jpg">
+						</div>
+						<div class="author-post">
+							<a href="#">Anh Nguyen</a>
+						</div>
+					</div>
+					<div class="post-content">
+						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
+					</div>
+					<div class="reaction-counter">
+						<p>100 likes</p>
+					</div>
+					<div class="post-reaction">
+						<div class="reaction-option">
+							<ul>
+								<li>
+									<button>
+										<i class="fa fa-thumbs-up"></i>
+									</button>
+								</li>
+								<li>
+									<button>
+										<i class="fa fa-comment"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+						<div class="comment-container">
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="post all-post-hihi">
+					<div class="post-info">
+						<div class="ava-post">
+							<img src="images/img2.jpg">
+						</div>
+						<div class="author-post">
+							<a href="#">Anh Nguyen</a>
+						</div>
+					</div>
+					<div class="post-content">
+						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
+					</div>
+					<div class="reaction-counter">
+						<p>100 likes</p>
+					</div>
+					<div class="post-reaction">
+						<div class="reaction-option">
+							<ul>
+								<li>
+									<button>
+										<i class="fa fa-thumbs-up"></i>
+									</button>
+								</li>
+								<li>
+									<button>
+										<i class="fa fa-comment"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+						<div class="comment-container">
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="comment">
+								<div class="comment-info">
+									<div class="ava-author-comment">
+										<img src="images/img3.jpg">
+									</div>
+									<a href="#">Nguyen Hoang Anh</a>
+								</div>
+								<div class="comment-content">
+									<p>This is so interesting!</p>
+								</div>
+							</div>
+							<div class="your-comment-container">
+								<form class="your-comment">
+									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
+									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
+								</form>
 							</div>
 						</div>
 					</div>
@@ -252,5 +437,17 @@
 			
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.bg-for-notice').click(function(event) {
+				$(this).hide();
+				$('.dropdown-notice').hide();
+			});
+			$('#notification').click(function(event) {
+				$('.dropdown-notice').show();
+				$('.bg-for-notice').show();
+			});
+		});
+	</script>
 </body>
 </html>
