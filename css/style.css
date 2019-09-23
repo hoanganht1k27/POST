@@ -44,6 +44,7 @@ a {
     width: calc(100% - 50px);
     float: left;
     position: relative;
+    padding-left: 50px;
     /* overflow: hidden; */
 }
 
@@ -94,21 +95,17 @@ ul.nav-list {
     position: fixed;
     top: 37px;
     z-index: 20;
-    /* width: 200px; */
-    /* right: 50%; */
     left: 50%;
     transform: translateX(-50%);
     background: #fffdfd;
-    display: none; 
-    border: 1px solid black;
-    border-radius: 5px;
+    display: none;
     max-width: 100%;
     max-height: 300px;
     overflow: auto;
 }
 
 .bg-for-notice {
-    background-color: #19181826;
+    background-color: #191818bf;
     z-index: 18;
     width: 100%;
     height: 100vh;
@@ -124,9 +121,18 @@ ul.nav-list {
 }
 
 .dropdown-notice ul li {
-    padding: 10px;
     font-size: 14px;
-    border-bottom: 1px solid black;
+}
+
+.dropdown-notice ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.dropdown-notice ul li:not(:last-child) {
+    border-bottom: 1px solid grey;
 }
 
 .dropdown-notice ul li a {
@@ -135,7 +141,24 @@ ul.nav-list {
 }
 
 .dropdown-notice ul li:hover {
-	background-color: grey;
+	background-color: #d8d8d8;
+}
+
+.notice-ava {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-right: 15px;
+}
+
+.notice-content {
+    width: calc(100% - 55px);
+    float: left;
+    min-height: 40px;
+    line-height: 25px;
+    vertical-align: middle;
 }
 
 .badge {
@@ -155,12 +178,87 @@ ul.nav-list {
     margin-top: 37px;
     overflow: hidden;
     background: #e0e0e0;
+    min-height: 100vh;
 }
 
 .left-container {
-    width: 25%;
-    height: 400px;
+    width: calc(25% - 10px);
+    margin-right: 10px;
+    background: white;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
     float: left;
+    margin-top: 20px;
+}
+
+.feed-container {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.feed-icon {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-right: 20px;
+}
+
+.feed-header {
+    width: calc(100% - 55px);
+    float: left;
+    vertical-align: middle;
+    line-height: 30px;
+    font-size: 24px;
+    font-family: calibri;
+}
+
+.find-friend-container {
+    float: left;
+    margin-top: 20px;
+    width: 100%;
+}
+
+input#new-friend {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    font-family: calibri;
+}
+
+.new-friend-list {
+    float: left;
+    margin-top: 10px;
+    /* overflow: hidden; */
+    width: 100%;
+}
+
+.new-friend-list ul {
+    /* list-style: none; */
+    /* width: 1000%; */
+    display: block;
+}
+
+.new-friend-list ul li {
+    display: block;
+    border: 1px solid #b1b1b1;
+    border-bottom: none;
+    width: 100%;
+}
+
+.new-friend-list ul li:last-child {
+    border-bottom: 1px solid #b1b1b1;
+}
+
+.link-to-newfr {
+    display: block;
+    padding: 10px;
+    color: black;
+    overflow: hidden;
+}
+
+.link-to-newfr:hover {
+    background-color: #E0E0E0;
 }
 
 .middle-container {
@@ -215,6 +313,8 @@ form.post-yourself {
 img {
     width: 100%;
     height: 100%;
+    background-position: center;
+    background-size: cover;
 }
 
 input#post-yourself {
@@ -276,6 +376,7 @@ input#submit-post-yourself:hover {
     margin-top: 20px;
     padding: 0 20px;
     padding-bottom: 10px;
+    font-size: 2em;
 }
 
 .reaction-counter {
@@ -312,8 +413,36 @@ input#submit-post-yourself:hover {
     font-size: 30px;
 }
 
+.liked {
+    color: #058D9E;
+    font-size: 30px;
+}
+
+.animate-for-like {
+    animation: like 0.3s linear forwards;
+}
+
+@keyframes like {
+    0% {
+
+    }
+    50% {
+        transform: rotate(30deg);
+        transform: scale(1.4);
+        color: #17F5FF;
+    }
+    90% {
+        color: #17F5FF;
+    }
+    100% {
+        transform: none;
+        color: #058D9E;
+    }
+}
+
 .comment-container {
 	margin-top: 30px;
+    display: none;
 }
 
 .comment {
@@ -349,7 +478,7 @@ form.your-comment {
     overflow: hidden;
 }
 
-input#ip-your-comment {
+input.ip-your-comment {
     width: calc(100% - 50px);
     float: left;
     display: block;
@@ -357,7 +486,7 @@ input#ip-your-comment {
     font-size: 16px;
 }
 
-input#submit-yourcommet {
+input.submit-yourcomment {
     padding: 6px;
     font-size: 16px;
     border: none;
@@ -372,6 +501,24 @@ input#submit-yourcommet {
     float: left;
 }
 
-input#submit-yourcommet:hover {
+input.submit-yourcomment:hover {
     background-color: #005F6B;
+}
+
+@media only screen and (max-width: 760px) {
+    .left {
+        display: none;
+    }
+    .left-container {
+        display: none;
+    }
+    .right {
+        display: none;
+    }
+    .middle-container {
+        width: 100%;
+    }
+    .dropdown-notice {
+        width: 100%;
+    }
 }

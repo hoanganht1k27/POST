@@ -47,6 +47,9 @@ a {
 .background-ava {
     overflow: hidden;
     height: 300px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 img {
@@ -69,6 +72,71 @@ img {
     overflow: hidden;
     border: 3px solid white;
     transform: translate(-50%, -50%);
+}
+
+.change-information {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+button#change-info {
+    border: none;
+    padding: 10px;
+    font-size: 17px;
+    background: #03A9F4;
+    color: white;
+    float: right;
+}
+
+#change-info:hover {
+    background: #005F6B;
+}
+
+.change-info {
+    border: 1px solid #d0cccc;
+    padding-top: 30px;
+    display: none;
+    float: right;
+    /* overflow: hidden; */
+}
+
+.change-info form {
+    overflow: hidden;
+    padding: 0px 10px;
+}
+
+label.label {
+    display: block;
+    width: 100%;
+    float: left;
+    padding-bottom: 10px;
+    font-size: 18px;
+    font-family: calibri;
+}
+
+.change-info form input {
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: calibri;
+}
+
+input#submit-change {
+    /* display: inline-block; */
+    width: 100px;
+    float: right;
+    margin-top: 20px;
+    border: none;
+    background: #10C1D8;
+    color: white;
+    font-size: 20px;
+}
+
+#submit-change:hover {
+    background: #005F6B;    
 }
 
 .following-container {
@@ -116,7 +184,6 @@ img {
 
 .follow-option button {
     float: right;
-    border-radius: 3px;
     padding: 5px 10px;
     border: none;
     outline: none;
@@ -126,7 +193,7 @@ img {
 }
 
 button#unfollow {
-    background: #00BCD4;
+    background: #03A9F4;
 }
 
 button#follow {
@@ -162,68 +229,3 @@ input#upload-bg {
 input#upload-bg:hover {
     background-color: #058D9E;
 }
-
-/*.post-yourself-container {
-    margin-top: 20px;
-    border-radius: 5px;
-    border: 1px solid black;
-    background-color: white;
-}
-
-.all-post-hihi {
-    border-radius: 5px;
-    border: 1px solid #b1b1b1;
-    background-color: white;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.post-yourself-container header {
-    padding: 10px 20px;
-    font-weight: bold;
-    font-family: calibri;
-    font-size: 20px;
-    background: white;
-}
-
-form.post-yourself {
-    overflow: hidden;
-    margin-top: 20px;
-}
-
-.ava-post-yourself {
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    float: left;
-    display: inline-block;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-
-input#post-yourself {
-    padding: 11px;
-    width: calc(100% - 70px);
-    float: left;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid grey;
-}
-
-input#submit-post-yourself {
-    border: none;
-    padding: 7px;
-    margin-top: 10px;
-    width: calc(100% - 70px);
-    font-weight: bold;
-    font-family: calibri;
-    font-size: 20px;
-    color: white;
-    background: #10c1d8;
-    margin-left: 50px;
-}
-
-input#submit-post-yourself:hover {
-    background-color: #005f6b;
-}*/
