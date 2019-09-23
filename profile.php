@@ -1,10 +1,29 @@
 <?php
+include_once('includes/include.php');
+use Login\CheckUser;
+
 session_start();
 
 if(!isset($_SESSION['username'])) {
 	header("Location: login.php");
 	exit();
 }
+
+$userId = $_SESSION['id'];
+if(isset($_GET['id'])) {
+	$userId = $_GET['id'];
+}
+
+$name = new CheckUser();
+$name = $name->getNameOfId($userId);
+
+if($name == "noname") {
+	header("Location: index.php");
+	exit();
+}
+
+$ava = new CheckUser();
+$ava = $ava->getAvatarUrl($_SESSION['id']);
 
 ?>
 
@@ -13,7 +32,7 @@ if(!isset($_SESSION['username'])) {
 <head>
 	<title>
 		<?php
-			echo $_SESSION['username'];
+			echo $name;
 		?>
 	</title>
 	<meta charset="utf-8">
@@ -33,7 +52,7 @@ if(!isset($_SESSION['username'])) {
 					</a>
 				</li>
 				<li>
-					<a href="profile.php" title="Profile">
+					<a href="profile.php?id=<?php echo $_SESSION['id']; ?>" title="Profile">
 						<i class="fa fa-user"></i>
 					</a>
 				</li>
@@ -56,21 +75,33 @@ if(!isset($_SESSION['username'])) {
 	<div class="bg-for-notice"></div>
 	<div class="dropdown-notice">
 		<ul>
-			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
+			<!-- <li>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh comment ctetur? Error wisi! Ratione sunt tempora! Consequat risus, possimus eleifend. Nec repellendus, cursus senectus! Ligula. Imperdiet dignissim impedit nam! Fermentum convallis magnis? Luced your post</p>
+				</a>
 			</li>
 			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh comment ctetur? Error wisi! Ratione</p>
+				</a>
 			</li>
 			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
-			</li>
-			<li>
-				<a href="#">Nguyen Hoang Anh commented your post heh kskd k lsk ksl kdl sk kslk dk lskd llkskdk  k ksk ks</a>
-			</li>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh co Fermentum convallis magnis? Luced your post</p>
+				</a>
+			</li> -->
 		</ul>
 	</div>
-	<div class="main">
+	<div class="main" userid="<?php echo $_SESSION['id']; ?>" userava="<?php echo $ava; ?>" username="<?php echo $_SESSION['username']; ?>" usingid="<?php echo $_SESSION['id']; ?>">
 		<div class="left">
 			<div class="following-container all-post-hihi">
 				<h4>Following</h4>
@@ -116,27 +147,68 @@ if(!isset($_SESSION['username'])) {
 		</div>
 		<div class="middle-container">
 			<div class="ava-container">
-				<div class="background-ava">
-					<img src="images/img4.jpg">
+				<div class="background-ava" style="background-image: url('<?php 
+						$bg = new CheckUser();
+						$bg = $bg->getBackground($userId);
+						echo 'avatar/'.$bg;
+					?>');">
 				</div>
 				<div class="main-ava">
-					<img src="images/img5.jpg">
+					<img src="<?php 
+						$ava = new CheckUser();
+						$ava = $ava->getAvatar($userId);
+						echo 'avatar/'.$ava;
+					?>">
 				</div>
 			</div>
-			<div class="upload-option">
-				<form>
+			<div class="upload-option" style="<?php 
+				if($userId != $_SESSION['id']) {
+					echo "display: none;";
+				}
+			?>">
+				<form method="post" enctype="multipart/form-data" action="changeImage.php">
 					Upload avatar: <input type="file" name="avatar"><br><br>
 					Upload background: <input type="file" name="background"><br><br>
 					<input type="submit" name="submit" value="Upload" id="upload-bg">
 				</form>
 			</div>
-			<div class="follow-option">
-				<button id="unfollow">Follow</button>
-				<button id="follow">Following</button>
+			<div class="change-information" style="<?php
+				if($userId != $_SESSION['id']) echo "display: none;";
+			?>">
+				<button id="change-info">Change your information</button>
+				<div class="all-post-hihi change-info">
+					<form method="post" action="changeInfo.php">
+						<label for="change-username" class="label">Change username</label>
+						<input type="text" name="change-username" id="change-username" placeholder="New username">
+						<label for="old-password" class="label">Confirm your old password</label>
+						<input type="password" name="old-password" id="old-password" placeholder="Your old password">
+						<label for="new-pass" class="label">Your new password</label>
+						<input type="password" name="new-pass" id="new-pass" placeholder="New password">
+						<label for="confirm-new-pass" class="label">Confirm your new password</label>
+						<input type="password" name="confirm-new-pass" id="confirm-new-pass" placeholder="Confirm new password">
+						<input type="submit" name="submit-change" value="Change" id="submit-change">
+					</form>
+				</div>
 			</div>
-			<div class="post-yourself-container all-post-hihi">
+			<div class="follow-option" data-id="<?php
+                    echo $userId;
+             ?>">
+	             <?php
+	             	$checkFollow = new CheckUser();
+	             	$checkFollow = $checkFollow->checkFollow($_SESSION['id'], $userId);
+	             	$style = "display: block;";
+	             	if($checkFollow === true) $style = "display: none;";
+	             	$style2 = "display: block;";
+	             	if($checkFollow === false) $style2 = "display: none;";
+	             ?>
+				<button id="unfollow" style="<?php echo $style; ?>">Follow</button>
+				<button id="follow" style="<?php echo $style2; ?>">Following</button>
+			</div>
+			<div class="post-yourself-container all-post-hihi" style="<?php 
+				if($userId != $_SESSION['id']) echo "display: none;";
+			?>">
 				<header>Post something here</header>
-				<form class="post-yourself">
+				<form class="post-yourself" method="post" action="postYourself.php">
 					<div class="ava-post-yourself">
 						<img src="images/img1.jpg">
 					</div>
@@ -145,71 +217,15 @@ if(!isset($_SESSION['username'])) {
 				</form>
 			</div>
 			<div class="all-post">
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php
+					$post = new CheckUser();
+					$post->showAllPost($userId);
+				?>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.bg-for-notice').click(function(event) {
-				$(this).hide();
-				$('.dropdown-notice').hide();
-			});
-			$('#notification').click(function(event) {
-				$('.dropdown-notice').show();
-				$('.bg-for-notice').show();
-			});
-		});
-	</script>
+	<script type="text/javascript" src="Js/chatkit.js"></script>
+	<script type="text/javascript" src="Js/notice.js"></script>
+	<script type="text/javascript" src="Js/event.js"></script>
 </body>
 </html>

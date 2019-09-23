@@ -1,4 +1,6 @@
 <?php
+include_once('includes/include.php');
+use Login\CheckUser;
 
 session_start();
 
@@ -6,6 +8,9 @@ if(!isset($_SESSION['username'])) {
 	header("Location: login.php");
 	exit();
 }
+
+$ava = new CheckUser();
+$ava = $ava->getAvatarUrl($_SESSION['id']);
 
 ?>
 
@@ -18,6 +23,8 @@ if(!isset($_SESSION['username'])) {
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   	<link rel="stylesheet" type="text/css" href="css/style.css">
   	<script type="text/javascript" src="Js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="Js/chatkit.js"></script>
+	<script type="text/javascript" src="Js/notice.js"></script>
 </head>
 <body>
 	<div class="nav-container">
@@ -29,7 +36,7 @@ if(!isset($_SESSION['username'])) {
 					</a>
 				</li>
 				<li>
-					<a href="profile.php" title="Profile">
+					<a href="profile.php?id=<?php echo $_SESSION['id']; ?>" title="Profile">
 						<i class="fa fa-user"></i>
 					</a>
 				</li>
@@ -52,27 +59,64 @@ if(!isset($_SESSION['username'])) {
 	<div class="bg-for-notice"></div>
 	<div class="dropdown-notice">
 		<ul>
-			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
+			<!-- <li>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh comment ctetur? Error wisi! Ratione sunt tempora! Consequat risus, possimus eleifend. Nec repellendus, cursus senectus! Ligula. Imperdiet dignissim impedit nam! Fermentum convallis magnis? Luced your post</p>
+				</a>
 			</li>
 			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh comment ctetur? Error wisi! Ratione</p>
+				</a>
 			</li>
 			<li>
-				<a href="#">Nguyen Hoang Anh commented your post</a>
-			</li>
-			<li>
-				<a href="#">Nguyen Hoang Anh commented your post heh kskd k lsk ksl kdl sk kslk dk lskd llkskdk  k ksk ks</a>
-			</li>
+				<a href="#">
+					<div class="notice-ava">
+						<img src="avatar/default-ava.jpg">
+					</div>
+					<p class="notice-content">Nguyen Hoang Anh co Fermentum convallis magnis? Luced your post</p>
+				</a>
+			</li> -->
 		</ul>
 	</div>
-	<div class="main">
+	<div class="main" userid="<?php echo $_SESSION['id']; ?>" userava="<?php echo $ava; ?>" username="<?php echo $_SESSION['username']; ?>" usingid="<?php echo $_SESSION['id']; ?>">
+		<script type="text/javascript">
+			var c = new chatkit();
+			c.init();
+		</script>
 		<div class="left-container">
+			<div class="feed-container">
+				<div class="feed-icon">
+					<img src="images/feed.png">
+				</div>
+				<div class="feed-header">
+					<h4>Your feed</h4>
+				</div>
+			</div>
+			<div class="new-friend-container feed-container">
+				<div class="new-friend-icon feed-icon">
+					<img src="images/newfr2.png">
+				</div>
+				<div class="feed-header">
+					<h4>Find new friends</h4>
+				</div>
+				<div class="find-friend-container">
+					<input type="search" name="new-friend" id="new-friend" placeholder="Your friend's name">
+				</div>
+				<div class="new-friend-list">
+				</div>
+			</div>
 		</div>
 		<div class="middle-container">
 			<div class="post-yourself-container all-post-hihi">
 				<header>Post something here</header>
-				<form class="post-yourself">
+				<form class="post-yourself" method="post" action="postYourself.php">
 					<div class="ava-post-yourself">
 						<img src="images/img1.jpg">
 					</div>
@@ -81,373 +125,16 @@ if(!isset($_SESSION['username'])) {
 				</form>
 			</div>
 			<div class="all-post">
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="post all-post-hihi">
-					<div class="post-info">
-						<div class="ava-post">
-							<img src="images/img2.jpg">
-						</div>
-						<div class="author-post">
-							<a href="#">Anh Nguyen</a>
-						</div>
-					</div>
-					<div class="post-content">
-						<p>blaaj jkds sks sks sls  s s s sa s ad fas fs f asdf asdf asf asf sf sd fd df sf sdf sdfsd fs dfs  sfd fsdf sdfsd s dfs dfs </p>
-					</div>
-					<div class="reaction-counter">
-						<p>100 likes</p>
-					</div>
-					<div class="post-reaction">
-						<div class="reaction-option">
-							<ul>
-								<li>
-									<button>
-										<i class="fa fa-thumbs-up"></i>
-									</button>
-								</li>
-								<li>
-									<button>
-										<i class="fa fa-comment"></i>
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="comment-container">
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="comment">
-								<div class="comment-info">
-									<div class="ava-author-comment">
-										<img src="images/img3.jpg">
-									</div>
-									<a href="#">Nguyen Hoang Anh</a>
-								</div>
-								<div class="comment-content">
-									<p>This is so interesting!</p>
-								</div>
-							</div>
-							<div class="your-comment-container">
-								<form class="your-comment">
-									<input type="text" name="your-comment" placeholder="What do you think?" id="ip-your-comment">
-									<input type="submit" id="submit-yourcommet" name="submit-your-comment" value="Post">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php
+					$following = new CheckUser();
+					$following->showAllFollowingPost($_SESSION['id']);
+				?>
 			</div>
 		</div>
 		<div class="right">
 			
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.bg-for-notice').click(function(event) {
-				$(this).hide();
-				$('.dropdown-notice').hide();
-			});
-			$('#notification').click(function(event) {
-				$('.dropdown-notice').show();
-				$('.bg-for-notice').show();
-			});
-		});
-	</script>
+	<script type="text/javascript" src="Js/event2.js"></script>
 </body>
 </html>

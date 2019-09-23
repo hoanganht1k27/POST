@@ -17,8 +17,6 @@
     		<form class="login-form" action="newUser.php" method="POST">
     			<p>Username</p>
     			<input type="text" name="username" placeholder="Username">
-    			<p>Userid</p>
-    			<input type="text" name="userid" placeholder="Userid">
     			<p>Password</p>
     			<input type="password" name="password" placeholder="Password">
     			<p>Confirm password</p>
